@@ -25,7 +25,7 @@ SECRET_KEY = 'i36w$v@^e%yg#w$bhiynp4xd+)8+75)1m!umhel!bsy)rtg+b5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'leonardo281.pythonanywhere.com']
+ALLOWED_HOSTS = [u'leonardo281.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pessoas',
+    'doces',
     'rest_framework',
 ]
 
@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
