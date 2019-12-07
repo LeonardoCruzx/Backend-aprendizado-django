@@ -8,13 +8,20 @@ from rest_framework import status
 from .serializers import *
 
 #DOCES
-@api_view(['GET'])
+@api_view(['GET','PUT'])
 def lista_doces(request):
 
     if request.method == 'GET':
         doces = DoceModel.objects.all()
         serializer = DocesSerializer(doces,many=True)
         return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = DocesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
 def detalhes_doces(request,pk):
@@ -39,7 +46,7 @@ def detalhes_doces(request,pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #CATEGORIAS
-@api_view(['GET'])
+@api_view(['GET','PUT'])
 def lista_categorias(request):
 
     if request.method == 'GET':
@@ -47,6 +54,12 @@ def lista_categorias(request):
         serializer = CategoriaSerializer(categorias,many=True)
         return Response(serializer.data)
 
+    elif request.method == 'PUT':
+        serializer = CategoriaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
 def detalhes_categorias(request,pk):
