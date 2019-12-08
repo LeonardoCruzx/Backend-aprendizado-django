@@ -31,8 +31,8 @@ class DoceModel(models.Model):
     )
     imagem = models.ImageField(
         upload_to="imagens_de_doces",
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
 
 
