@@ -8,7 +8,7 @@ class CategoriaModel(models.Model):
         blank=False
     )
 
-class DoceModel(models.Model):
+class ProdutoModel(models.Model):
     nome = models.CharField(
         max_length=30,
         null=False,

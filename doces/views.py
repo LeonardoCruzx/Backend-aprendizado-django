@@ -12,12 +12,12 @@ from .serializers import *
 def lista_doces(request):
 
     if request.method == 'GET':
-        doces = DoceModel.objects.all()
-        serializer = DocesSerializer(doces,many=True)
+        produtos = ProdutoModel.objects.all()
+        serializer = ProdutoSerializer(produtos,many=True)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = DocesSerializer(data=request.data)
+        serializer = ProdutoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -26,23 +26,23 @@ def lista_doces(request):
 @api_view(['GET','PUT','DELETE'])
 def detalhes_doces(request,pk):
     try:
-        doce = DoceModel.objects.get(pk=pk)
+        produto = ProdutoModel.objects.get(pk=pk)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = DocesSerializer(doce)
+        serializer = ProdutoSerializer(produto)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = DocesSerializer(doce, data=request.data)
+        serializer = ProdutoSerializer(produto, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        doce.delete()
+        produto.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #CATEGORIAS

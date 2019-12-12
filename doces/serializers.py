@@ -6,9 +6,9 @@ class CategoriaSerializer(serializers.ModelSerializer):
         model = CategoriaModel
         fields = '__all__'
 
-class DocesSerializer(serializers.ModelSerializer):
+class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DoceModel
+        model = ProdutoModel
         fields = '__all__'
 
 

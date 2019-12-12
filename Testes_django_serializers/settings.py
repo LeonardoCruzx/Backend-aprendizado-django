@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'doces',
+    'usuarios',
     'rest_framework',
-    'corsheaders',
-    'doces'
-
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +131,9 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = u'/home/leonardo281/Testes_django_serializers/static'
 STATIC_URL = '/static/'
 
+
+#CORS permite outros dominios fazerem requisicoes ao meu site
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
@@ -139,3 +142,6 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
 ]
+
+#AUTH permite adicionar meu usuario personalizado ao auth do django
+AUTH_USER_MODEL = 'usuarios.User'
