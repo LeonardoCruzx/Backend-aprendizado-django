@@ -15,6 +15,12 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         pass
 
+    user_permissions = ["can_login"]
+
+    def __str__(self):
+        return self.username
+
+
 
 
 

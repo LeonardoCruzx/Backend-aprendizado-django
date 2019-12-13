@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'doces',
+    'produtos',
     'usuarios',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders'
 ]
 
@@ -145,3 +146,14 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 
 #AUTH permite adicionar meu usuario personalizado ao auth do django
 AUTH_USER_MODEL = 'usuarios.User'
+
+
+#AUTENTICACAO DO DJANGO REST FRAMEWORK POR MEIO DE TOKEN
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', )
+}

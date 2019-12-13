@@ -1,15 +1,16 @@
 
 from django.shortcuts import render
 
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 from .serializers import *
 
+
 #DOCES
 @api_view(['GET','PUT'])
-def lista_doces(request):
+def lista_de_produtos(request):
 
     if request.method == 'GET':
         produtos = ProdutoModel.objects.all()
@@ -24,7 +25,8 @@ def lista_doces(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
-def detalhes_doces(request,pk):
+def detalhes_de_produtos(request,pk):
+
     try:
         produto = ProdutoModel.objects.get(pk=pk)
     except:
@@ -47,7 +49,7 @@ def detalhes_doces(request,pk):
 
 #CATEGORIAS
 @api_view(['GET','PUT'])
-def lista_categorias(request):
+def lista_de_categorias(request):
 
     if request.method == 'GET':
         categorias = CategoriaModel.objects.all()
@@ -62,7 +64,8 @@ def lista_categorias(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
-def detalhes_categorias(request,pk):
+def detalhes_de_categorias(request,pk):
+
     try:
         categoria = CategoriaModel.objects.get(pk=pk)
     except:
@@ -82,3 +85,5 @@ def detalhes_categorias(request,pk):
     elif request.method == 'DELETE':
         categoria.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+

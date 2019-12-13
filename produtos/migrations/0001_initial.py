@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('preco', models.FloatField()),
                 ('descricao', models.CharField(max_length=200)),
                 ('imagem', models.ImageField(blank=True, null=True, upload_to='imagens_de_doces')),
-                ('categoria', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='doces.CategoriaModel')),
+                ('categoria', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='produtos.CategoriaModel')),
             ],
         ),
     ]
