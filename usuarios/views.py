@@ -48,17 +48,17 @@ def detalhes_de_usuarios(request):
 
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
-def login(request):
+def login(request,format=None):
     if request.method == 'GET':
-        return Response({"mensagem":"entre com o usuario e com a senha"})
+        return Response({"mensagem":"Entre com o usuario e com a senha"})
 
     if request.method == 'POST':
-        username = request.data.get("username")
-        password = request.data.get("password")
+        username = request.data["username"]
+        password = request.data["password"]
         if username is None or password is None:
-            return Response({'error': 'Please provide both username and password'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'erro': 'Porfavor insira o nome de usuario e a senha'},status=status.HTTP_400_BAD_REQUEST)
         user = authenticate(username=username, password=password)
         if not user:
-            return Response({'error': 'Invalid Credentials'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'erro': 'Credencias invalidas (sem token)'},status=status.HTTP_404_NOT_FOUND)
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key},status=status.HTTP_200_OK)

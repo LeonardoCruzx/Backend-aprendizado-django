@@ -25,7 +25,7 @@ SECRET_KEY = 'i36w$v@^e%yg#w$bhiynp4xd+)8+75)1m!umhel!bsy)rtg+b5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'leonardo281.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = [u'leonardo281.pythonanywhere.com','127.0.0.1','http://localhost:3000/']
 
 
 # Application definition
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'Testes_django_serializers.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'leonardo281$teste',
+        'USER': 'leonardo281',
+        'PASSWORD': 'teste001',
+        'HOST': 'leonardo281.mysql.pythonanywhere-services.com',
+        'PORT': '',
     }
 }
 
@@ -157,3 +161,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated', )
 }
+
+#CONEXAO DO BANCO DE DADOS COM O SERVIDOR:
+
+try:
+    from .local import *
+except ImportError:
+    print("ambiente de servidor")
+
