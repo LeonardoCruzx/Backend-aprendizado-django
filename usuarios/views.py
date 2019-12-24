@@ -24,7 +24,7 @@ def lista_de_usarios(request):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes((IsAuthenticated,))
 def detalhes_de_usuarios(request):
     try:
         user = User.objects.get(pk=request.user.pk)
@@ -50,14 +50,14 @@ def detalhes_de_usuarios(request):
 @permission_classes((AllowAny,))
 def login(request,format=None):
     if request.method == 'GET':
-        return Response({"mensagem":"Entre com o usuario e com a senha"})
+        return Response({"mensagem":"Entre com o email e com a senha"})
 
     if request.method == 'POST':
-        username = request.data["username"]
+        email = request.data["email"]
         password = request.data["password"]
-        if username is None or password is None:
-            return Response({'erro': 'Porfavor insira o nome de usuario e a senha'},status=status.HTTP_400_BAD_REQUEST)
-        user = authenticate(username=username, password=password)
+        if email is None or password is None:
+            return Response({'erro': 'Porfavor insira o email e a senha'},status=status.HTTP_400_BAD_REQUEST)
+        user = authenticate(email=email, password=password)
         if not user:
             return Response({'erro': 'Credencias invalidas (sem token)'},status=status.HTTP_404_NOT_FOUND)
         token, _ = Token.objects.get_or_create(user=user)

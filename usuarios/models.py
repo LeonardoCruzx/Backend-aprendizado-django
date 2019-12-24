@@ -4,11 +4,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
 
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 class User(AbstractUser):
     objects = UserManager()
     username = None
+
     last_login = models.DateTimeField(
         auto_now=True,
         null=True
@@ -22,6 +25,11 @@ class User(AbstractUser):
         null=True,
         unique=True
     )
+    profile_picture = CloudinaryField(
+        "profile_pictures/profile_picture",
+        default="profile_pictures/default_profile_picture",
+        null=True
+    )
 
     user_permissions = ["can_login"]
 
@@ -34,6 +42,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.nick
+
+    
 
 
 

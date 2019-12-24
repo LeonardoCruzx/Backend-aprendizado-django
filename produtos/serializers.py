@@ -11,4 +11,12 @@ class ProdutoSerializer(serializers.ModelSerializer):
         model = ProdutoModel
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super(ProdutoSerializer, self).to_representation(instance)
+        try:
+            representation['product_picture'] = instance.product_picture.url
+        except:
+            representation['product_picture'] = None
+        return representation
+
 

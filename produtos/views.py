@@ -10,9 +10,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import *
 
 
-#DOCES
+#PRODUTOS
 @api_view(['GET','PUT'])
-@permission_classes((IsAuthenticated,))
+@permission_classes((AllowAny,))
 def lista_de_produtos(request):
 
     if request.method == 'GET':
@@ -52,6 +52,7 @@ def detalhes_de_produtos(request,pk):
 
 #CATEGORIAS
 @api_view(['GET','PUT'])
+@permission_classes((AllowAny,))
 def lista_de_categorias(request):
 
     if request.method == 'GET':

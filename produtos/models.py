@@ -1,39 +1,51 @@
 from django.db import models
 
+from cloudinary.models import CloudinaryField
 # Create your models here.
 class CategoriaModel(models.Model):
-    nome = models.CharField(
+    name = models.CharField(
+        verbose_name="nome",
         max_length=30,
         null=False,
-        blank=False
+        blank=False,
+        unique=True
     )
+    def __str__(self):
+        return self.nome
 
 class ProdutoModel(models.Model):
-    nome = models.CharField(
+    name = models.CharField(
+        verbose_name="nome",
         max_length=30,
         null=False,
         blank=False
     )
-    categoria = models.ForeignKey(
+    category = models.ForeignKey(
         "CategoriaModel",
+        verbose_name="categorias",
         on_delete=models.CASCADE,
         null=False,
         blank=False
     )
-    preco = models.FloatField(
+    price = models.FloatField(
+        verbose_name="preco",
         null=False,
         blank=False
     )
-    descricao = models.CharField(
+    description = models.CharField(
+        verbose_name="descrição",
         max_length=200,
         null=False,
         blank=False
     )
-    imagem = models.ImageField(
-        upload_to="imagens_de_doces",
-        null=True,
-        blank=True
+    product_picture = CloudinaryField(
+        "product_pictures/product_picture",
+        default="product_pictures/default_product_picture",
+        null=True
     )
+
+    def __str__(self):
+        return self.nome
 
 
 

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import cloudinary
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +45,23 @@ INSTALLED_APPS = [
     'usuarios',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
+    'cloudinary'
+]
+
+cloudinary.config(
+    cloud_name ="dcilb7ohr",
+    api_key="376785633126983",
+    api_secret="olKiyinurqJQc61jEF9Pmd8ZgLE"
+)
+
+PASSWORD_HASHERS = [
+    'Testes_django_serializers.hashers.MyPBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 
 MIDDLEWARE = [
