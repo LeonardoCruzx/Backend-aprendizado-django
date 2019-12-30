@@ -11,7 +11,11 @@ class CategoriaModel(models.Model):
         unique=True
     )
     def __str__(self):
-        return self.nome
+        return self.name
+
+    class Meta:
+        verbose_name="categoria"
+        verbose_name_plural="categorias"
 
 class ProdutoModel(models.Model):
     name = models.CharField(
@@ -20,12 +24,9 @@ class ProdutoModel(models.Model):
         null=False,
         blank=False
     )
-    category = models.ForeignKey(
+    category = models.ManyToManyField(
         "CategoriaModel",
         verbose_name="categorias",
-        on_delete=models.CASCADE,
-        null=False,
-        blank=False
     )
     price = models.FloatField(
         verbose_name="preco",
@@ -45,7 +46,11 @@ class ProdutoModel(models.Model):
     )
 
     def __str__(self):
-        return self.nome
+        return self.name
+
+    class Meta:
+        verbose_name="produto"
+        verbose_name_plural="produtos"
 
 
 

@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 
 from .meus_scripts.my_utils import make_nickname
 
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 

@@ -45,7 +45,7 @@ def detalhes_de_usuarios(request):
     elif request.method == 'DELETE':
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
+"""
 @api_view(['GET','POST'])
 @permission_classes((AllowAny,))
 def login(request,format=None):
@@ -61,4 +61,18 @@ def login(request,format=None):
         if not user:
             return Response({'erro': 'Credencias invalidas (sem token)'},status=status.HTTP_404_NOT_FOUND)
         token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key},status=status.HTTP_200_OK)
+"""
+
+
+@api_view(['GET','POST'])
+@permission_classes((AllowAny,))
+def login(request,format=None):
+    if request.method == 'GET':
+        return Response({"mensagem":"Entre com o email e com a senha"})
+    if request.method == 'POST':
+        data = User.autenticar_se(request)
+        if type(data) == dict:
+            return Response(data,status=status.HTTP_400_BAD_REQUEST)
+        token, _ = Token.objects.get_or_create(user=data)
         return Response({'token': token.key},status=status.HTTP_200_OK)
